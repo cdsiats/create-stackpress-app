@@ -1,0 +1,903 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,700&display=swap');
+
+/* Default Theme
+---------------------------------*/
+
+:root {
+  --bg-zero: #f7f1e8;
+  --bg-first: #efe5d7;
+  --bg-second: #dfd3c3;
+  --bg-third: #c4b8a4;
+  --bg-fourth: #9f9687;
+  --bg-inverse: #14202b;
+  --bg-info: #d9ecff;
+  --bg-error: #f8d7da;
+  --bg-warning: #fff3cd;
+  --bg-success: #d4edda;
+  --zero: #14202b;
+  --default: #253342;
+  --inverse: #f8f4ee;
+  --primary: #0f6dff;
+  --secondary: #b66a2f;
+  --info: #0f6dff;
+  --error: #dc3545;
+  --warning: #b66a2f;
+  --success: #2d8d52;
+  --muted: #5f6f7d;
+  --white: #ffffff;
+  --black: #000000;
+  --console-bg: radial-gradient(circle at top, rgba(15, 109, 255, 0.12), transparent 34%), linear-gradient(180deg, #fbf7f1 0%, #f3ebdf 48%, #ede2d1 100%);
+  --console-panel: rgba(255, 250, 244, 0.82);
+  --console-panel-strong: linear-gradient(180deg, rgba(20, 32, 43, 0.96), rgba(26, 42, 56, 0.92));
+  --console-border: rgba(37, 51, 66, 0.12);
+  --console-shadow: 0 24px 70px rgba(29, 40, 54, 0.14);
+  --console-radius: 28px;
+  --console-grid: rgba(20, 32, 43, 0.06);
+  /* This fixes FOUC */
+  display: none;
+}
+
+.dark {
+  --muted: #B4B4B4;
+  --bg-zero: #121212;
+  --bg-first: #232323;
+  --bg-second: #323232;
+  --bg-third: #424242;
+  --bg-fourth: #525252;
+  --bg-inverse: #DBDBDB;
+  --zero: #FFFFFF;
+  --default: #CFCFCF;
+  --inverse: #222222;
+  --console-bg: radial-gradient(circle at top, rgba(89, 168, 255, 0.16), transparent 32%), linear-gradient(180deg, #0d1720 0%, #111d27 50%, #162330 100%);
+  --console-panel: rgba(16, 26, 35, 0.82);
+  --console-panel-strong: linear-gradient(180deg, rgba(7, 12, 18, 0.96), rgba(11, 19, 27, 0.94));
+  --console-border: rgba(214, 226, 237, 0.08);
+  --console-shadow: 0 28px 80px rgba(0, 0, 0, 0.34);
+  --console-grid: rgba(214, 226, 237, 0.08);
+}
+
+/* Reset (normalize.css)
+---------------------------------*/
+
+html, body, #root {
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-size: 14px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  position: relative;
+  width: 100%;
+}
+
+/*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+2. [UnoCSS]: allow to override the default border color with css var `--un-default-border-color`
+*/
+
+*,
+::before,
+::after {
+  box-sizing: border-box; /* 1 */
+  border-width: 0; /* 2 */
+  border-style: solid; /* 2 */
+  border-color: var(--un-default-border-color, #e5e7eb); /* 2 */
+}
+
+::before,
+::after {
+  --un-content: '';
+}
+
+/*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS.
+*/
+
+html,
+:host {
+  line-height: 1.5; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  -moz-tab-size: 4; /* 3 */
+  tab-size: 4; /* 3 */
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
+  font-feature-settings: normal; /* 5 */
+  font-variation-settings: normal; /* 6 */
+  -webkit-tap-highlight-color: transparent; /* 7 */
+}
+
+/*
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+*/
+
+body {
+  margin: 0; /* 1 */
+  line-height: inherit; /* 2 */
+}
+
+/*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+
+hr {
+  height: 0; /* 1 */
+  color: inherit; /* 2 */
+  border-top-width: 1px; /* 3 */
+}
+
+/*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+abbr:where([title]) {
+  text-decoration: underline dotted;
+}
+
+/*
+Remove the default font size and weight for headings.
+*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/*
+Add the correct font weight in Edge and Safari.
+*/
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/*
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
+*/
+
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */
+  font-feature-settings: normal; /* 2 */
+  font-variation-settings: normal; /* 3 */
+  font-size: 1em; /* 4 */
+}
+
+/*
+Add the correct font size in all browsers.
+*/
+
+small {
+  font-size: 80%;
+}
+
+/*
+Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+*/
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/*
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
+*/
+
+table {
+  text-indent: 0; /* 1 */
+  border-color: inherit; /* 2 */
+  border-collapse: collapse; /* 3 */
+}
+
+/*
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
+*/
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-feature-settings: inherit; /* 1 */
+  font-variation-settings: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  font-weight: inherit; /* 1 */
+  line-height: inherit; /* 1 */
+  color: inherit; /* 1 */
+  margin: 0; /* 2 */
+  padding: 0; /* 3 */
+}
+
+/*
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+button,
+select {
+  text-transform: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
+*/
+
+button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
+  -webkit-appearance: button; /* 1 */
+  background-color: transparent; /* 2 */
+  background-image: none; /* 2 */
+}
+
+/*
+Use the modern Firefox focus style for all focusable elements.
+*/
+
+:-moz-focusring {
+  outline: auto;
+}
+
+/*
+Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+*/
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/*
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+progress {
+  vertical-align: baseline;
+}
+
+/*
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/*
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+[type='search'] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/*
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to `inherit` in Safari.
+*/
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+summary {
+  display: list-item;
+}
+
+/*
+Removes the default spacing for appropriate elements.
+*/
+
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+  margin: 0;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+dialog {
+  padding: 0;
+}
+
+/*
+Prevent resizing textareas horizontally by default.
+*/
+
+textarea {
+  resize: vertical;
+}
+
+/*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
+
+input::placeholder,
+textarea::placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
+
+/*
+Set the default cursor for buttons.
+*/
+
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+/*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+
+:disabled {
+  cursor: default;
+}
+
+/*
+1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+   This can trigger a poorly considered lint error in some tools but is included by design.
+*/
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block; /* 1 */
+  vertical-align: middle; /* 2 */
+}
+
+/*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/*
+Make elements with the HTML hidden attribute stay hidden by default.
+*/
+
+[hidden]:where(:not([hidden="until-found"])) {
+  display: none;
+}
+
+body {
+  background: var(--bg-zero);
+  color: var(--default);
+}
+
+#root {
+  isolation: isolate;
+}
+
+.knowledge-app {
+  background: var(--console-bg);
+  color: var(--default);
+  height: 100%;
+  overflow: auto;
+  padding: 32px 20px 56px;
+  position: relative;
+}
+
+.knowledge-app::before {
+  background-image:
+    linear-gradient(to right, transparent 0, transparent calc(100% - 1px), var(--console-grid) calc(100% - 1px)),
+    linear-gradient(to bottom, transparent 0, transparent calc(100% - 1px), var(--console-grid) calc(100% - 1px));
+  background-position: center;
+  background-size: 44px 44px;
+  content: '';
+  inset: 0;
+  opacity: 0.28;
+  pointer-events: none;
+  position: absolute;
+}
+
+.knowledge-shell {
+  margin: 0 auto;
+  max-width: 1200px;
+  position: relative;
+  z-index: 1;
+}
+
+.knowledge-shell-reading {
+  max-width: 980px;
+}
+
+.knowledge-panel {
+  backdrop-filter: blur(18px);
+  background: var(--console-panel);
+  border: 1px solid var(--console-border);
+  border-radius: var(--console-radius);
+  box-shadow: var(--console-shadow);
+  position: relative;
+}
+
+.knowledge-panel::after {
+  border-radius: inherit;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  content: '';
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.knowledge-panel-strong {
+  background: var(--console-panel-strong);
+  color: var(--inverse);
+}
+
+.knowledge-topbar {
+  align-items: center;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1.1fr 1.6fr auto;
+  margin-bottom: 24px;
+  padding: 20px 4px;
+}
+
+.knowledge-kicker,
+.knowledge-section-label {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+.knowledge-panel-strong .knowledge-section-label {
+  color: rgba(248, 244, 238, 0.66);
+}
+
+.knowledge-brand {
+  color: var(--zero);
+  display: inline-block;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  line-height: 0.95;
+}
+
+.knowledge-topbar-copy,
+.knowledge-lead,
+.knowledge-section-copy,
+.knowledge-feature-summary,
+.knowledge-card-summary {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.knowledge-topbar-action,
+.knowledge-inline-link,
+.article-backlink {
+  align-items: center;
+  color: var(--primary);
+  display: inline-flex;
+  font-weight: 700;
+  gap: 8px;
+}
+
+.knowledge-topbar-action::after,
+.knowledge-inline-link::after,
+.article-backlink::after {
+  content: '\2192';
+  font-size: 0.95em;
+}
+
+.knowledge-hero {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.9fr);
+  margin-bottom: 28px;
+}
+
+.knowledge-hero-copy,
+.knowledge-feature,
+.knowledge-closing,
+.article-hero,
+.article-banner,
+.article-reading-surface {
+  padding: 28px;
+}
+
+.knowledge-display,
+.knowledge-section-title,
+.article-title {
+  color: var(--zero);
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(2.4rem, 5vw, 4.6rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.94;
+  margin: 0 0 16px;
+  text-wrap: balance;
+}
+
+.knowledge-section-title,
+.article-title {
+  font-size: clamp(2rem, 3vw, 3.2rem);
+  line-height: 1.02;
+}
+
+.knowledge-signal-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 28px;
+}
+
+.knowledge-signal {
+  background: rgba(255, 255, 255, 0.56);
+  border: 1px solid rgba(15, 109, 255, 0.08);
+  border-radius: 20px;
+  padding: 16px 18px;
+}
+
+.knowledge-signal-label {
+  color: var(--muted);
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.knowledge-signal-value {
+  color: var(--zero);
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.knowledge-feature-media,
+.knowledge-card-media {
+  border-radius: 20px;
+  display: block;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.knowledge-feature-media img,
+.knowledge-card-media img,
+.article-banner img {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  transition: transform 200ms ease;
+  width: 100%;
+}
+
+.knowledge-feature:hover .knowledge-feature-media img,
+.knowledge-card:hover .knowledge-card-media img {
+  transform: scale(1.03);
+}
+
+.knowledge-meta-row,
+.article-meta {
+  color: rgba(95, 111, 125, 0.92);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+.knowledge-meta-row span,
+.article-meta span {
+  position: relative;
+}
+
+.knowledge-meta-row span:not(:first-child)::before,
+.article-meta span:not(:first-child)::before {
+  color: rgba(95, 111, 125, 0.5);
+  content: '•';
+  left: -12px;
+  position: absolute;
+}
+
+.knowledge-panel-strong .knowledge-meta-row {
+  color: rgba(248, 244, 238, 0.72);
+}
+
+.knowledge-panel-strong .knowledge-meta-row span:not(:first-child)::before {
+  color: rgba(248, 244, 238, 0.38);
+}
+
+.knowledge-feature-title,
+.knowledge-card-title {
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(1.7rem, 2.4vw, 2.3rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+  margin: 0 0 14px;
+}
+
+.knowledge-card-title {
+  color: var(--zero);
+  font-size: 1.7rem;
+}
+
+.knowledge-panel-strong .knowledge-feature-title a {
+  color: var(--inverse);
+}
+
+.knowledge-empty-state h2,
+.knowledge-empty-state p {
+  margin: 0;
+}
+
+.knowledge-empty-state h2 {
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.knowledge-empty-state p {
+  color: rgba(248, 244, 238, 0.76);
+  line-height: 1.7;
+}
+
+.knowledge-section {
+  margin-top: 28px;
+}
+
+.knowledge-section-heading {
+  align-items: end;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 1.2fr 1fr;
+  margin-bottom: 18px;
+}
+
+.knowledge-card-grid,
+.knowledge-topic-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.knowledge-card-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.knowledge-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 20px;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.knowledge-card:hover {
+  border-color: rgba(15, 109, 255, 0.2);
+  box-shadow: 0 28px 76px rgba(29, 40, 54, 0.18);
+  transform: translateY(-2px);
+}
+
+.knowledge-card-footer {
+  align-items: center;
+  color: var(--muted);
+  display: flex;
+  gap: 14px;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.knowledge-topics {
+  padding-bottom: 4px;
+}
+
+.knowledge-topic-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.knowledge-topic-chip {
+  background: rgba(20, 32, 43, 0.84);
+  border: 1px solid rgba(20, 32, 43, 0.9);
+  border-radius: 20px;
+  color: var(--inverse);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  padding: 18px 20px;
+}
+
+.knowledge-closing {
+  overflow: hidden;
+}
+
+.knowledge-closing::before {
+  background: radial-gradient(circle at top left, rgba(15, 109, 255, 0.18), transparent 45%);
+  content: '';
+  inset: -10% auto auto -10%;
+  pointer-events: none;
+  position: absolute;
+  width: 55%;
+}
+
+.article-backlink {
+  margin: 6px 0 18px;
+}
+
+.article-hero {
+  margin-bottom: 20px;
+}
+
+.article-banner {
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.article-tag {
+  background: rgba(15, 109, 255, 0.08);
+  border: 1px solid rgba(15, 109, 255, 0.12);
+  border-radius: 999px;
+  color: var(--primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 8px 12px;
+}
+
+@media (max-width: 1100px) {
+  .knowledge-topbar,
+  .knowledge-hero,
+  .knowledge-section-heading,
+  .knowledge-card-grid,
+  .knowledge-topic-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .knowledge-topbar {
+    padding-top: 8px;
+  }
+
+  .knowledge-card-grid {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 720px) {
+  .knowledge-app {
+    padding: 18px 14px 44px;
+  }
+
+  .knowledge-hero-copy,
+  .knowledge-feature,
+  .knowledge-closing,
+  .article-hero,
+  .article-banner,
+  .article-reading-surface {
+    padding: 22px 18px;
+  }
+
+  .knowledge-signal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .knowledge-brand {
+    font-size: 2.1rem;
+  }
+
+  .knowledge-display {
+    font-size: 2.7rem;
+  }
+
+  .knowledge-section-title,
+  .article-title {
+    font-size: 2.2rem;
+  }
+}
