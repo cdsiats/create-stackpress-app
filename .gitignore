@@ -1,5 +1,6 @@
 # node modules
 /node_modules
+/src/templates/**/node_modules
 
 # build
 /dist

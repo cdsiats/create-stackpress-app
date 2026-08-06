@@ -3,13 +3,16 @@
   "version": "0.0.1",
   "description": "A project generator for stackpress applications.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc && cp -R src/templates dist/templates && cp src/logo.txt dist/logo.txt"
   },
   "keywords": [
     "stackpress",
     "scaffold",
     "typescript"
   ],
+  "bin": {
+    "create-sp-app": "dist/main.js"
+  },
   "author": "cdsiats",
   "type": "module",
   "dependencies": {
