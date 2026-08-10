@@ -88,17 +88,21 @@ async function main() {
   });
   isCancelled(shouldInitGit);
 
-  const shouldGenerateIdeas = await confirm({
-    message: 'Run `stackpress generate`?',
-    initialValue: true
-  });
-  isCancelled(shouldGenerateIdeas);
-
-  const shouldMigrateAndDeploy = await confirm({
-    message: 'Generate migrations and deploy?',
-    initialValue: true
-  });
-  isCancelled(shouldMigrateAndDeploy);
+  let shouldGenerateIdeas: boolean | symbol = false;
+  let shouldMigrateAndDeploy: boolean | symbol = false;
+  if (Boolean(shouldInstallDeps)) {
+    shouldGenerateIdeas = await confirm({
+      message: 'Run `stackpress generate`?',
+      initialValue: true
+    });
+    isCancelled(shouldGenerateIdeas);
+  
+    shouldMigrateAndDeploy = await confirm({
+      message: 'Generate migrations and deploy?',
+      initialValue: true
+    });
+    isCancelled(shouldMigrateAndDeploy);
+  }
 
   await copyTemplate({
     templateName: 'minimal',
