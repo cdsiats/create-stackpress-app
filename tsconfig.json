@@ -44,6 +44,7 @@
   "exclude": [
     "src/templates",
     "node_modules",
-    "dist"
+    "dist",
+    "scripts"
   ]
 }

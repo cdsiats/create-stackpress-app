@@ -16,4 +16,4 @@ export default defineConfig({
     presetWind3(),
     presetStackpress()
   ]
-})
+});

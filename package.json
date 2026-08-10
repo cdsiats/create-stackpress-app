@@ -1,26 +1,30 @@
 {
   "name": "create-stackpress-app",
   "version": "0.0.1",
+  "author": "cdsiats",
+  "type": "module",
   "description": "A project generator for stackpress applications.",
   "scripts": {
-    "build": "tsc && cp -R src/templates dist/templates && cp src/logo.txt dist/logo.txt"
+    "build": "npm run clean && tsc && npm run copy",
+    "clean": "node src/scripts/clean-build.js",
+    "copy": "node src/scripts/copy-assets.js"
   },
   "keywords": [
     "stackpress",
-    "scaffold",
-    "typescript"
+    "scaffolding",
+    "typescript",
+    "node",
+    "nodejs"
   ],
   "bin": {
     "create-sp-app": "dist/main.js"
   },
-  "author": "cdsiats",
-  "type": "module",
   "dependencies": {
     "@clack/prompts": "1.7.0",
-    "@types/node": "^26.1.2",
+    "@types/node": "26.1.2",
     "picocolors": "1.1.1"
   },
   "devDependencies": {
-    "typescript": "^7.0.2"
+    "typescript": "7.0.2"
   }
 }
