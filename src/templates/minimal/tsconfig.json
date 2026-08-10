@@ -6,9 +6,11 @@
     "outDir": ".build",
   },
   "include": [ 
-    "config/**/*.ts", 
-    "plugins/**/*.ts", 
-    "plugins/**/*.tsx"
+    "config/**/*.ts",
+    "plugins/**/*.ts",
+    "plugins/**/*.tsx",
+    "client-source/**/*.ts",
+    "client-source/**/*.tsx"
   ],
   "exclude": [ "dist", "node_modules", "tests" ]
 }
