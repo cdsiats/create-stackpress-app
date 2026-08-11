@@ -3,10 +3,9 @@
   "compilerOptions": {
     "module": "nodenext",
     "moduleResolution": "nodenext",
-    "rootDir": ".",
     "outDir": ".build",
   },
-  "include": [ 
+  "include": [
     "config/**/*.ts",
     "plugins/**/*.ts",
     "plugins/**/*.tsx",
