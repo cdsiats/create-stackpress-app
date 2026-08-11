@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import type { ServerPageProps } from 'stackpress/view/client';
-import { useLanguage } from 'stackpress/view/client';
-import Layout from '../components/Layout.js';
+import type { ServerConfigPageProps, ServerPageProps } from 'stackpress/view/client';
+import { LayoutBlank, useLanguage } from 'stackpress/view/client';
 
 export function Head(props: ServerPageProps) {
   const { styles = [] } = props;
@@ -50,16 +49,17 @@ export function Body() {
   );
 }
 
-export default function Page(props: ServerPageProps) {
-  const { session, request, response } = props;
+export default function Page(props: ServerConfigPageProps) {
+  const { data, session, request, response } = props;
 
   return (
-    <Layout
+    <LayoutBlank
+      data={data}
       session={session}
       request={request}
       response={response}
     >
       <Body />
-    </Layout>
+    </LayoutBlank>
   );
 }
