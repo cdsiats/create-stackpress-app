@@ -4,6 +4,7 @@
   "author": "cdsiats",
   "type": "module",
   "description": "A project generator for stackpress applications.",
+  "license": "MIT",
   "scripts": {
     "build": "npm run clean && tsc && npm run copy && npm run chmod-bin",
     "clean": "node src/scripts/clean-build.js",
@@ -18,14 +19,15 @@
     "nodejs"
   ],
   "bin": {
-    "create-sp-app": "dist/main.js"
+    "create-stackpress-app": "dist/main.js"
   },
+  "files": [ "dist" ],
   "dependencies": {
     "@clack/prompts": "1.7.0",
-    "@types/node": "26.1.2",
     "picocolors": "1.1.1"
   },
   "devDependencies": {
+    "@types/node": "26.1.2",
     "typescript": "7.0.2"
   }
 }
