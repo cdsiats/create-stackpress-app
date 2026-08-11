@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { 
   existsSync,
 } from 'node:fs';
-import { cp, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 //modules
 import { cancel, isCancel } from '@clack/prompts';
 import type { CopyTemplateOptions, ReplaceTemplateValues } from './types.js';
@@ -48,6 +48,13 @@ export async function copyTemplate(options: CopyTemplateOptions) {
       return true;
     }
   });
+
+  const templateGitIgnore = path.join(targetDirectory, '_gitignore');
+  const targetGitIgnore = path.join(targetDirectory, '.gitignore');
+  
+  if (existsSync(templateGitIgnore)) {
+    await rename(templateGitIgnore, targetGitIgnore);
+  }
 
   await replaceTemplateValues(targetDirectory, {
     projectName: options.projectName,
