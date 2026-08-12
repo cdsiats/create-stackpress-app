@@ -1,6 +1,6 @@
 {
   "name": "create-stackpress-app",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "cdsiats",
   "type": "module",
   "description": "A project generator for stackpress applications.",
