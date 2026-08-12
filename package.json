@@ -5,6 +5,10 @@
   "type": "module",
   "description": "A project generator for stackpress applications.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cdsiats/create-stackpress-app.git"
+  },
   "scripts": {
     "build": "npm run clean && tsc && npm run copy && npm run chmod-bin",
     "clean": "node src/scripts/clean-build.js",
