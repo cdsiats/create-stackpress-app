@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { 
   existsSync,
 } from 'node:fs';
-import { cp, mkdir, readFile, rename, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readFile, rename, writeFile, copyFile } from 'node:fs/promises';
 //modules
 import { cancel, isCancel } from '@clack/prompts';
 import type { CopyTemplateOptions, ReplaceTemplateValues } from './types.js';
@@ -85,6 +85,13 @@ async function replaceTemplateValues(
 
     await writeFile(filePath, updatedPlaceholders);
   };
+};
+
+export async function copyEnvFile(targetDirectory: string) {
+  await copyFile(
+    path.join(targetDirectory, '.env.example'),
+    path.join(targetDirectory, '.env')
+  );
 };
 
 export function runCommand(

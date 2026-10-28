@@ -260,7 +260,7 @@ export const database = {
       data: {
         profileId: 'developer',
         type: 'email',
-        token: 'developer@shoppable.ph',
+        token: 'developer@example.com',
         secret: 'developer'
       }
     },

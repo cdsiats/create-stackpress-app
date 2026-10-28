@@ -21,7 +21,7 @@ Accepted Reusable Truth for the generator package. Source Provenance paths are r
 ## Repository Layout
 
 - `src/main.ts` — CLI entrypoint (shebang `#!/usr/bin/env node`).
-- `src/helpers.ts` — cancellation check, template copy, placeholder replacement, child-process runner.
+- `src/helpers.ts` — cancellation check, template copy, placeholder replacement, `.env` copy, child-process runner.
 - `src/types.ts` — `CopyTemplateOptions` and `ReplaceTemplateValues` types.
 - `src/scripts/clean-build.js` — removes `dist`.
 - `src/scripts/copy-assets.js` — copies `src/templates` to `dist/templates` and `src/logo.txt` to `dist/logo.txt`.
@@ -47,7 +47,7 @@ Accepted Reusable Truth for the generator package. Source Provenance paths are r
 11. When init-git: `git init`, then `git add .`, then `git commit -m 'Initial commit'` in the target directory.
 12. When generate: `npm run generate` in the target directory.
 13. When migrate+deploy: `npm run migrate`, then `npm run push`, in the target directory.
-14. Always: `cp .env.example .env` in the target directory.
+14. Always: `copyEnvFile` copies `.env.example` to `.env` in the target directory (Node `fs.copyFile`).
 15. `outro` "<projectName> has been created. Welcome to stackpress!".
 
 ## Behavior Notes
@@ -55,8 +55,8 @@ Accepted Reusable Truth for the generator package. Source Provenance paths are r
 - Every prompt result is passed through `isCancelled()` in `src/helpers.ts`; on `@clack/prompts` cancel it calls `cancel('App creation cancelled.')` and `process.exit(0)`.
 - The selected database value is not used downstream in this version; the `minimal` template always targets PGlite. (Consistent with the disabled MySQL/Postgres options and roadmap.)
 - `runCommand` spawns with `stdio: 'ignore'` (no child output relayed to the user), `shell: true` only on win32, resolves on exit code 0, and rejects with "<command> <args> failed." on non-zero exit.
-- `main().catch` logs `err.message` and calls `process.exit(0)`; failures therefore exit with code 0. See GAP-03.
-- The final `.env` copy step invokes the `cp` binary on every platform. See GAP-02.
+- `main().catch` logs `err.message` and calls `process.exit(1)`; failures exit with code 1, while user cancellation still exits 0.
+- The final `.env` copy step uses `copyEnvFile` (Node `fs.copyFile`) in `src/helpers.ts`; no external `cp` binary is required, so it works on Windows and Unix.
 - `copyTemplate` throws "Templates <name> does not exist." when the requested template folder is missing.
 
 ## Build And Publish
@@ -85,13 +85,13 @@ From `README.md` (planned, not implemented):
 
 ## Known Gaps And Conflicts
 
-Unresolved items found while bootstrapping context; resolve them before treating the related claim as final.
+Items found while bootstrapping context; all five were resolved in the gap-fixes session.
 
-- GAP-01, Status: unresolved. README-vs-bin mismatch: `README.md` tells users to run `create-sp-app`, but the `package.json` bin key is `create-stackpress-app`. Which command should users run?
-- GAP-02, Status: unresolved. `.env` copy portability: `runCommand('cp', ['.env.example', '.env'], ...)` relies on a `cp` binary; the win32 `shell: true` default (`cmd.exe`) has no built-in `cp`, so the final step likely fails on Windows. Intended?
-- GAP-03, Status: unresolved. Exit code: `main().catch` calls `process.exit(0)` on failure, so CI and scripts see success even when scaffolding failed. Intended?
-- GAP-04, Status: unresolved. Seeded email: template seed data uses `developer@shoppable.ph` (`src/templates/minimal/config/common.ts`), which appears unrelated to this project. Leftover to replace?
-- GAP-05, Status: unresolved. Translation typo: template locale `th_TH` maps "Home Page" to "Home Pagesss" (`src/templates/minimal/config/common.ts`). Example typo to clean up?
+- GAP-01, Status: resolved (user decision, gap-fixes session). Users run `create-stackpress-app`; the bin entry stays as-is and `README.md` was corrected to use `create-stackpress-app` instead of `create-sp-app`.
+- GAP-02, Status: resolved (user decision, gap-fixes session). `.env` copy now uses Node `fs.copyFile` via `copyEnvFile` in `src/helpers.ts`; the `cp` spawn was removed.
+- GAP-03, Status: resolved (user decision, gap-fixes session). `main().catch` now calls `process.exit(1)` on failure; cancellation still exits 0.
+- GAP-04, Status: resolved (user decision, gap-fixes session). Seeded auth email changed from `developer@shoppable.ph` to `developer@example.com` in `src/templates/minimal/config/common.ts`.
+- GAP-05, Status: resolved (user decision, gap-fixes session). Keep the `th_TH` translation "Home Pagesss" as-is; it is example locale data.
 
 ## Source Provenance
 

@@ -86,7 +86,7 @@ All configs live under `config/`. `common.ts` exports shared sections; each envi
 
 - profile `developer` (type person, roles `[ 'ADMIN' ]`);
 - auth username `developer` / secret `developer`;
-- auth email `developer@shoppable.ph` / secret `developer` (see GAP-04 in [Project Overview](project-overview.md));
+- auth email `developer@example.com` / secret `developer`;
 - application "Developer App" with scopes `profile-write`, `auth-read`, expiring one year from creation.
 
 ## Source Provenance

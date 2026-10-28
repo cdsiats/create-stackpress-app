@@ -15,7 +15,7 @@ import {
 } from '@clack/prompts';
 import pc from 'picocolors';
 //local
-import { copyTemplate, isCancelled, runCommand } from './helpers.js';
+import { copyEnvFile, copyTemplate, isCancelled, runCommand } from './helpers.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -143,12 +143,12 @@ async function main() {
     spin.stop('Applied to database.');
   }
   //copy .env.example into .env
-  await runCommand('cp', ['.env.example', '.env'], installedProjectDirectory);
+  await copyEnvFile(installedProjectDirectory);
 
   outro(`${String(projectName)} has been created. Welcome to stackpress!`);
 };
 
 main().catch((err: Error) => {
   console.error(err.message); 
-  process.exit(0);
+  process.exit(1);
 });

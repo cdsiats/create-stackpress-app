@@ -9,7 +9,7 @@ npm i -g create-stackpress-app
 
 Run the package where you want to create a stackpress project:
 ```sh
-create-sp-app
+create-stackpress-app
 ```
 
 # Roadmap
