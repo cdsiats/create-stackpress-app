@@ -8,7 +8,7 @@ Accepted Reusable Truth for the generator package. Source Provenance paths are r
 - Type: global CLI project generator; `preferGlobal: true` is set. Install with `npm i -g create-stackpress-app` (`README.md`).
 - Repository: `git+https://github.com/cdsiats/create-stackpress-app.git`.
 - npm `files` allowlist: `dist` only. Published bin entry: `"create-stackpress-app": "dist/main.js"`.
-- Purpose: scaffold a working [Stackpress](https://stackpress.io) application into a target directory from the bundled `minimal` template.
+- Purpose: help developers and AI scaffold working [Stackpress](https://stackpress.io) applications easily, depending on what they need, by generating a project into a target directory from a bundled template (currently `minimal`).
 
 ## Generator Tech Stack
 
@@ -65,6 +65,15 @@ Accepted Reusable Truth for the generator package. Source Provenance paths are r
 - Publishing ships only `dist` (`files: ["dist"]`), so `dist/templates` must contain `minimal` for runtime template copying.
 - Root `.gitignore`: `/node_modules`, `/src/templates/**/node_modules`, `/dist`.
 
+## Project Direction
+
+From user direction (chat, context-bootstrap session):
+
+- Stackpress framework documentation is still a work in progress; do not assume external docs are complete or authoritative, and verify framework behavior against code.
+- The CLI's goal is to help developers and AI scaffold projects easily depending on what they need.
+- Add support for multiple databases: Postgres, MySQL, SQLite, PGlite, CockroachDB, and others.
+- Add support for multiple project types: full-stack projects, API-only projects, and others.
+
 ## Roadmap
 
 From `README.md` (planned, not implemented):
@@ -97,3 +106,4 @@ Canonical repo files retained in place; context bootstrapped at git head `40f202
 - `tsconfig.json` — generator compile settings.
 - `.gitignore` — root ignores.
 - `src/templates/minimal/**` — template; contract in [Minimal Template Contract](template-contract.md).
+- User direction in this session — project goals: developers and AI as consumers, multiple databases and project types, Stackpress docs still a work in progress.
